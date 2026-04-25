@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SymbolWriter</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo">Symbol<span>Writer</span> <span class="ver">v2</span></div>
+  <div class="hdr-btns">
+    <button class="hbtn" id="themeBtn" onclick="toggleTheme()" style="color: var(--accent2)">☀ Light</button>
+    <button class="hbtn" onclick="togglePanel('shortcuts')" style="color: var(--accent2)">⌨ Shortcuts</button>
+    <button class="hbtn" onclick="togglePanel('custom')" style="color: var(--accent2)">＋ My Symbols</button>
+    <button class="hbtn" onclick="togglePanel('calc')" style="color: var(--accent2)">∑ Calculator</button>
+    <button class="hbtn" onclick="openDataLab()" style="color: var(--accent2)">📊 Data Lab</button>
+    <div class="sep-v"></div>
+    <button class="hbtn lit" onclick="copyForWord()" style="color: var(--accent2)">📋 Copy for Word</button>
+    <button class="hbtn" onclick="copyPlain()" style="color: var(--accent2)">⎘ Copy Text</button>
+    <button class="hbtn" onclick="exportDocx()" style="color: var(--accent2)">↓ Export .doc</button>
+    <button class="hbtn" onclick="exportTxt()" style="color: var(--accent2)">↓ .txt</button>
+    <button class="hbtn" onclick="clearAll()" style="color: var(--danger)">✕ Clear</button>
+  </div>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+  <!-- TOOLBAR ROW 1: Text Style -->
+  <div class="toolbar" id="toolbar1">
+    <span class="tlabel">Style</span>
+    <select class="tsel" id="fsz" onchange="applyFS(this.value)" title="Font size">
+      <option value="11">11px</option>
+      <option value="13">13px</option>
+      <option value="15" selected>15px</option>
+      <option value="18">18px</option>
+      <option value="22">22px</option>
+      <option value="28">28px</option>
+      <option value="36">36px</option>
+    </select>
+    <select class="tsel" onchange="applyFF(this.value)" title="Font family">
+      <option value="'Syne',sans-serif">Sans</option>
+      <option value="'Georgia',serif">Serif</option>
+      <option value="'JetBrains Mono',monospace">Mono</option>
+      <option value="'Times New Roman',serif">Times</option>
+      <option value="'Arial',sans-serif">Arial</option>
+    </select>
+    <select class="tsel" onchange="applyLineHeight(this.value)" title="Line spacing">
+      <option value="1.4">1.4×</option>
+      <option value="1.8" selected>1.8×</option>
+      <option value="2.2">2.2×</option>
+      <option value="2.6">2.6×</option>
+    </select>
+    <div class="sep"></div>
+    <button class="tbtn" id="btn-bold" onclick="fmt('bold')" title="Bold Ctrl+B"><b>B</b></button>
+    <button class="tbtn" id="btn-italic" onclick="fmt('italic')" title="Italic Ctrl+I"><i>I</i></button>
+    <button class="tbtn" id="btn-underline" onclick="fmt('underline')" title="Underline Ctrl+U"><u>U</u></button>
+    <button class="tbtn" id="btn-strikethrough" onclick="fmt('strikeThrough')"><s>S</s></button>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="fmt('superscript')" title="Superscript">x²</button>
+    <button class="tbtn" onclick="fmt('subscript')" title="Subscript">x₂</button>
+    <div class="sep"></div>
+    <label class="clabel" title="Text color">A <input type="color" id="fgColor" value="#e2e0f0" onchange="fmt('foreColor',this.value)"></label>
+    <label class="clabel" title="Highlight"><span style="background:#fde68a;color:#333;padding:0 3px;border-radius:2px">H</span> <input type="color" id="hlColor" value="#fde68a" onchange="fmt('hiliteColor',this.value)"></label>
+  </div>
+
+  <!-- TOOLBAR ROW 2: Paragraph -->
+  <div class="toolbar" id="toolbar2">
+    <span class="tlabel">Para</span>
+    <button class="tbtn" id="btn-justifyLeft" onclick="fmt('justifyLeft')" title="Align left">⬅</button>
+    <button class="tbtn" id="btn-justifyCenter" onclick="fmt('justifyCenter')" title="Center">⬛</button>
+    <button class="tbtn" id="btn-justifyRight" onclick="fmt('justifyRight')" title="Align right">➡</button>
+    <button class="tbtn" id="btn-justifyFull" onclick="fmt('justifyFull')" title="Justify">≡</button>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="fmt('insertUnorderedList')" title="Bullet list">• List</button>
+    <button class="tbtn" onclick="fmt('insertOrderedList')" title="Numbered list">1. List</button>
+    <button class="tbtn" onclick="insertTaskList()" title="Task list">☐ Task</button>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="insertQuote()" title="Block quote">❝ Quote</button>
+    <button class="tbtn" onclick="insertHR()" title="Divider">── HR</button>
+    <button class="tbtn" onclick="insertCode()" title="Code block">&lt;/&gt; Code</button>
+    <button class="tbtn" onclick="insertTable()" title="Insert table">⊞ Table</button>
+    <div class="sep"></div>
+    <select class="tsel" onchange="applyHeading(this.value)" id="headSel" title="Heading style">
+      <option value="">Normal</option>
+      <option value="H1">Heading 1</option>
+      <option value="H2">Heading 2</option>
+      <option value="H3">Heading 3</option>
+    </select>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="fmt('indent')" title="Indent">→|</button>
+    <button class="tbtn" onclick="fmt('outdent')" title="Outdent">|←</button>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="fmt('undo')" title="Undo Ctrl+Z">↩</button>
+    <button class="tbtn" onclick="fmt('redo')" title="Redo Ctrl+Y">↪</button>
+    <button class="tbtn" onclick="removeFormat()" title="Clear formatting">✕ Fmt</button>
+  </div>
+
+  <!-- HINT BAR -->
+  <div class="hint">
+    Type <kbd>/</kbd> + shortcut to insert symbols &nbsp;·&nbsp;
+    <kbd>/alpha</kbd>→α &nbsp;<kbd>/sum</kbd>→∑ &nbsp;<kbd>/right</kbd>→→ &nbsp;·&nbsp;
+    Press <kbd>Space</kbd> or <kbd>Enter</kbd> to confirm &nbsp;·&nbsp;
+    <kbd>Ctrl+Shift+C</kbd> Copy for Word
+  </div>
+
+  <!-- EDITOR -->
+  <div class="ed-wrap">
+    <div id="ed" contenteditable="true"
+         data-ph="Start typing... use /alpha, /sum, /heart, /pi etc. for symbols. Press / to see suggestions."
+         spellcheck="true"></div>
+    <div id="sug" class="sug"></div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="status">
+    <div style="display:flex;gap:16px;align-items:center">
+      <div class="stat">Words <b id="wc">0</b></div>
+      <div class="stat">Chars <b id="cc">0</b></div>
+      <div class="stat">Lines <b id="lc">1</b></div>
+      <div class="stat">Selected <b id="sc">0</b></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="stat" id="act">Ready</div>
+      <button class="tbtn" onclick="toggleSpell()" id="spellBtn" title="Toggle spellcheck">✓ Spell</button>
+      <button class="tbtn" onclick="toggleWordCount()" id="wcBtn" title="Toggle word count panel">📊</button>
+    </div>
+  </div>
+</div>
+
+<!-- WORD COUNT PANEL -->
+<div class="panel" id="panel-wc">
+  <div class="panel-hdr"><span>📊 Document Stats</span></div>
+  <div class="wc-grid" id="wcGrid"></div>
+</div>
+
+<!-- SHORTCUTS PANEL -->
+<div class="panel" id="panel-shortcuts">
+  <div class="panel-hdr">
+    <span>⌨ Symbol Shortcuts</span>
+    <input class="panel-search" id="psearch" placeholder="Filter symbols..." oninput="filterPanel(this.value)">
+  </div>
+  <div class="pgrid" id="pgrid"></div>
+</div>
+
+<!-- CUSTOM SYMBOLS PANEL -->
+<div class="panel" id="panel-custom">
+  <div class="panel-hdr">
+    <span>＋ My Custom Symbols</span>
+    <span class="muted" style="font-size:10px">Add your own shortcuts (saved in browser)</span>
+  </div>
+  <div class="custom-add">
+    <div class="custom-form">
+      <div class="cf-row">
+        <label>Shortcut <span class="muted">(starts with /)</span></label>
+        <input class="cinput" id="cKey" placeholder="/mykey" oninput="validateCustomKey()" />
+        <span class="cerr" id="cKeyErr"></span>
+      </div>
+      <div class="cf-row">
+        <label>Symbol / Text</label>
+        <input class="cinput" id="cSym" placeholder="→ or any text or emoji" />
+      </div>
+      <div class="cf-row">
+        <label>Name <span class="muted">(optional)</span></label>
+        <input class="cinput" id="cName" placeholder="e.g. my arrow" />
+      </div>
+      <div class="cf-row">
+        <button class="hbtn lit" onclick="addCustom()">＋ Add Shortcut</button>
+        <button class="hbtn" onclick="importCustom()">↑ Import JSON</button>
+        <button class="hbtn" onclick="exportCustom()">↓ Export JSON</button>
+      </div>
+    </div>
+  </div>
+  <div class="pgrid" id="cgrid"></div>
+</div>
+
+<!-- CALCULATOR PANEL -->
+<div class="panel" id="panel-calc">
+  <div class="panel-hdr">
+    <span>∑ Calculator</span>
+    <div style="display:flex;gap:6px">
+      <button class="hbtn" onclick="calcClear()">✕ Clear</button>
+    </div>
+  </div>
+  <div class="calc-sheet">
+    <div class="calc-fxbar">
+      <span>fx</span>
+      <span id="calc-fx">select a cell</span>
+    </div>
+    <div class="calc-badges" id="calc-badges"></div>
+    <div class="calc-grid hdr">
+      <div class="calc-hcell">#</div>
+      <div class="calc-hcell">expression</div>
+      <div class="calc-hcell" style="justify-content:flex-end">result</div>
+      <div class="calc-hcell"></div>
+    </div>
+    <div id="calc-rows"></div>
+    <button class="calc-addrow" onclick="calcAddRow('')">+ add row</button>
+    <div class="calc-help">
+      <b style="color:var(--accent)">Variables:</b> &nbsp;
+      <code>x = 10</code> &nbsp;·&nbsp;
+      <code>y = x * 2</code> &nbsp;·&nbsp;
+      <b style="color:var(--accent)">Functions:</b> &nbsp;
+      <code>sqrt(</code> <code>abs(</code> <code>sin(</code> <code>cos(</code> <code>log(</code> <code>ln(</code> <code>round(</code> &nbsp;·&nbsp;
+      <b style="color:var(--accent)">Constants:</b> &nbsp;
+      <code>pi</code> <code>e</code> &nbsp;·&nbsp;
+      <b style="color:var(--accent)">Power:</b> &nbsp;<code>x^2</code> &nbsp;·&nbsp;
+      Press <kbd style="background:var(--btn);border:1px solid var(--border);border-radius:3px;padding:1px 5px;font-size:10px">↩</kbd> to insert result into editor , creat functions f(x,n) = x^n
+      <button class="hbtn" onclick="hideGraph()">Hide Graph</button>
+      <div id="calc-custom-list" class="custom-fn-container"></div>
+    </div>
+  </div>
+</div>
+
+<div id="data-lab-modal" class="modal-overlay">
+  <div class="data-lab-container">
+    <div class="data-lab-header">
+      <h3>📊 Data Analysis Lab</h3>
+      <button class="hbtn danger" onclick="closeDataLab()">Close</button>
+    </div>
+    
+    <div class="data-lab-toolbar">
+      <button class="tbtn" onclick="addTableRow()">+ Add Row</button>
+      <button class="tbtn" onclick="addTableCol()">+ Add Column</button>
+      <button class="tbtn" onclick="calculateSum()">∑ Sum</button>
+      <button class="tbtn" onclick="calculateAverage()">Average</button>
+      <button class="tbtn" onclick="clearTable()">Clear</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="analysis-table" class="analysis-table">
+        </table>
+    </div>
+    
+    <div id="data-result" class="data-result-box">
+      </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+
+<script src="js/math.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/symbols.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/wordcopy.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/dataLab.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
