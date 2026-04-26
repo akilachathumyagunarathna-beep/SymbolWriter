@@ -1,13 +1,12 @@
-// ── BUILT-IN SYMBOLS ──
-const SM_BUILTIN = {
+export const SM_BUILTIN: Record<string, string> = {
   '/alpha':'α','/beta':'β','/gamma':'γ','/delta':'Δ','/epsilon':'ε','/zeta':'ζ',
   '/eta':'η','/theta':'θ','/iota':'ι','/kappa':'κ','/lambda':'λ','/mu':'μ',
   '/nu':'ν','/xi':'ξ','/pi':'π','/rho':'ρ','/sigma':'σ','/tau':'τ','/phi':'φ',
   '/omega':'ω','/Gamma':'Γ','/Lambda':'Λ','/Sigma':'Σ','/Phi':'Φ','/Omega':'Ω',
-  '/chi':'χ','/psi':'ψ','/upsilon':'υ','/xi':'ξ',
+  '/chi':'χ','/psi':'ψ','/upsilon':'υ',
   '/sum':'∑','/prod':'∏','/int':'∫','/iint':'∬','/oint':'∮',
   '/sqrt':'√','/cbrt':'∛','/inf':'∞','/approx':'≈','/ne':'≠',
-  '/le':'≤','/ge':'≥','/lt':'<','/gt':'>','/pm':'±','/mp':'∓',
+  '/le':'≤','/ge':'≥','/pm':'±','/mp':'∓',
   '/deg':'°','/div':'÷','/mul':'×','/dot':'·','/cdot':'⋅',
   '/any':'∀','/exist':'∃','/nexist':'∄','/in':'∈','/notin':'∉',
   '/subset':'⊂','/supset':'⊃','/subseteq':'⊆','/supseteq':'⊇',
@@ -24,22 +23,23 @@ const SM_BUILTIN = {
   '/cross':'✗','/star':'★','/bullet':'•','/euro':'€','/pound':'£',
   '/yen':'¥','/section':'§','/para':'¶','/dagger':'†','/ddagger':'‡',
   '/ellipsis':'…','/mdash':'—','/ndash':'–','/laquo':'«','/raquo':'»',
-  '/ldquo':'"','/rdquo':'"',
+  '/ldquo':'\u201C','/rdquo':'\u201D',
   '/smile':'☺','/frown':'☹','/thumbup':'👍','/thumbdown':'👎',
   '/fire':'🔥','/note':'📝','/warn':'⚠','/info':'ℹ',
   '/^2':'²','/^3':'³','/^n':'ⁿ','/^+':'⁺','/^-':'⁻','/^0':'⁰',
   '/_0':'₀','/_1':'₁','/_2':'₂','/_3':'₃','/_4':'₄','/_5':'₅',
   '/_6':'₆','/_7':'₇','/_8':'₈','/_9':'₉','/_n':'ₙ','/_x':'ₓ','/_a':'ₐ',
-  '/1/2':'½','/1/3':'⅓','/1/4':'¼','/2/3':'⅔','/3/4':'¾','/1/8':'⅛','/3/8':'⅜','/5/8':'⅝','/7/8':'⅞',
+  '/1/2':'½','/1/3':'⅓','/1/4':'¼','/2/3':'⅔','/3/4':'¾',
+  '/1/8':'⅛','/3/8':'⅜','/5/8':'⅝','/7/8':'⅞',
   '/box':'□','/bbox':'■','/circle':'○','/bcircle':'●','/diamond':'◇','/bdiamond':'◆',
   '/spade':'♠','/club':'♣','/heartsuit':'♥','/diamsym':'♦',
   '/music':'♪','/dmusic':'♫','/phone':'☎','/mail':'✉','/home':'⌂',
   '/sun':'☀','/moon':'☽','/cloud':'☁','/snow':'❄','/umbrella':'☂',
 };
 
-const CATS_BUILTIN = {
+export const CATS_BUILTIN: Record<string, string[]> = {
   'Greek Letters':['/alpha','/beta','/gamma','/delta','/epsilon','/zeta','/eta','/theta','/iota','/kappa','/lambda','/mu','/nu','/xi','/pi','/rho','/sigma','/tau','/phi','/chi','/psi','/omega','/upsilon','/Gamma','/Lambda','/Sigma','/Phi','/Omega'],
-  'Math Operators':['/sum','/prod','/int','/iint','/oint','/sqrt','/cbrt','/partial','/nabla','/inf','/approx','/ne','/le','/ge','/lt','/gt','/pm','/mp','/deg','/div','/mul','/dot','/cdot','/circ','/oplus','/otimes'],
+  'Math Operators':['/sum','/prod','/int','/iint','/oint','/sqrt','/cbrt','/partial','/nabla','/inf','/approx','/ne','/le','/ge','/pm','/mp','/deg','/div','/mul','/dot','/cdot','/circ','/oplus','/otimes'],
   'Set Theory':['/any','/exist','/nexist','/in','/notin','/subset','/supset','/subseteq','/supseteq','/union','/inter','/empty'],
   'Geometry':['/angle','/perp','/parallel','/triangle','/lfloor','/rfloor','/lceil','/rceil','/cong','/sim','/propto','/therefore','/because'],
   'Arrows':['/right','/left','/up','/down','/double','/implies','/iff','/Leftarrow','/Uparrow','/Downarrow','/mapsto','/hookright','/hookleft','/nearrow','/nwarrow','/searrow','/swarrow'],
@@ -50,10 +50,10 @@ const CATS_BUILTIN = {
   'Card Suits':['/spade','/club','/heartsuit','/diamsym'],
   'Weather & Nature':['/sun','/moon','/cloud','/snow','/umbrella'],
   'Music & Communication':['/music','/dmusic','/phone','/mail','/home'],
-  'Misc':['/copyright','/reg','/tm','/heart','/check','/cross','/star','/bullet','/euro','/pound','/yen','/section','/para','/dagger','/ddagger','/ellipsis','/mdash','/ndash','/laquo','/raquo','/ldquo','/rdquo','/lsquo','/rsquo','/smile','/frown','/thumbup','/thumbdown','/fire','/note','/warn','/info'],
+  'Misc':['/copyright','/reg','/tm','/heart','/check','/cross','/star','/bullet','/euro','/pound','/yen','/section','/para','/dagger','/ddagger','/ellipsis','/mdash','/ndash','/laquo','/raquo','/ldquo','/rdquo','/smile','/frown','/thumbup','/thumbdown','/fire','/note','/warn','/info'],
 };
 
-const NAMES_BUILTIN = {
+export const NAMES_BUILTIN: Record<string, string> = {
   '/alpha':'alpha','/beta':'beta','/gamma':'gamma','/delta':'delta','/epsilon':'epsilon',
   '/theta':'theta','/pi':'pi','/sigma':'sigma','/phi':'phi','/omega':'omega',
   '/chi':'chi','/psi':'psi','/lambda':'lambda','/mu':'mu',
@@ -82,8 +82,3 @@ const NAMES_BUILTIN = {
   '/music':'music note','/phone':'phone','/mail':'envelope','/home':'home',
   '/1/2':'one half','/1/3':'one third','/1/4':'one quarter','/2/3':'two thirds','/3/4':'three quarters',
 };
-
-// Combined SM (will include customs)
-let SM = {...SM_BUILTIN};
-let CATS = {...CATS_BUILTIN};
-let NAMES = {...NAMES_BUILTIN};

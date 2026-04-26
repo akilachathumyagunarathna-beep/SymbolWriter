@@ -1,0 +1,30 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "> A browser-based rich text editor with a built-in symbol library, scientific calculator, and spreadsheet engine — built as a first project using AI-assisted learning.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "vite --host 0.0.0.0 --port 5000",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^20.19.39",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "chart.js": "^4.5.1",
+    "mathjs": "^13.2.3",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21"
+  }
+}
